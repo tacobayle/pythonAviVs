@@ -1,4 +1,4 @@
-# python Avi LSC VS
+# python Avi VS
 
 ## Goals
 Configure a Health Monitor, Pool and VS through Python (Python SDK)
