@@ -37,7 +37,9 @@ avi@ansible:~/python/aviVs$ more creds.json
 ```
 
 2. All the other paramaters/variables are stored in the python script aviVs.py.
-The variable called 'PoolServerList' needs to be adjusted.
+The below variable(s) called need(s) to be adjusted:
+- poolServerList
+The other varaiables don't need to be adjusted.
 
 ```
 # Health Monitor
