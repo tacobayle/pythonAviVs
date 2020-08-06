@@ -76,3 +76,37 @@ python3 aviVs.py creds.json
 ```
 
 ## Improvment:
+- add SE service group
+- add log and analytics capabilities
+```
+resource "avi_virtualservice" "https_vs" {
+  name                          = var.vs_name
+  pool_group_ref                = avi_poolgroup.poolgroup1.id
+  tenant_ref                    = data.avi_tenant.default_tenant.id
+  vsvip_ref                     = avi_vsvip.test_vsvip.id
+  cloud_ref                     = data.avi_cloud.default_cloud.id
+  ssl_key_and_certificate_refs  = [data.avi_sslkeyandcertificate.ssl_cert1.id]
+  ssl_profile_ref               = data.avi_sslprofile.ssl_profile1.id
+  application_profile_ref       = data.avi_applicationprofile.application_profile1.id
+  network_profile_ref           = data.avi_networkprofile.network_profile1.id
+  services {
+    port           = var.vs_port
+    enable_ssl     = true
+  }
+  analytics_policy {
+    client_insights = "NO_INSIGHTS"
+    all_headers = "false"
+    udf_log_throttle = "10"
+    significant_log_throttle = "0"
+    metrics_realtime_update {
+      enabled  = "true"
+      duration = "0"
+    }
+    full_client_logs {
+        enabled = "true"
+        throttle = "10"
+        duration = "30"
+    }
+  }
+}
+```
