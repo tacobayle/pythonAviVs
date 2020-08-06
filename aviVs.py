@@ -62,7 +62,7 @@ class aviSession:
 
   def retrieveNetworkNameMaskType(self, networkUuid):
     api = ApiSession.get_session(self.fqdn, self.username, self.password, self.tenant)
-    network = api.get('network')
+    network = api.get('network?page_size=-1')
     for item in network.json()['results']:
         if item['uuid'] == networkUuid:
             name = item['name']
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     poolData = {
       "name": objectPrefix + poolName,
       "lb_algorithm:": poolA,
-      "health_monitor_refs": ['/api/healthmonitor?name=' + poolHm],
+      "health_monitor_refs": ['/api/healthmonitor?name=' + objectPrefix + hmHttpName],
       "servers": servers
     }
     print(defineClass.configurePool(poolData))

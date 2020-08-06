@@ -23,6 +23,7 @@ Avi 18.2.9
 ### Avi Environment
 
 - LSC Cloud
+- VMware V-center
 
 
 ## Input/Parameters:
