@@ -23,7 +23,7 @@ Avi 18.2.9
 ### Avi Environment
 
 - LSC Cloud
-- VMware V-center
+- VMware Cloud (Vsphere 6.7.0.42000) without NSX
 
 
 ## Input/Parameters:
