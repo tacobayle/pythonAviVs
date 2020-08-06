@@ -21,7 +21,7 @@ hmHttpSc = 2
 poolName = 'pool1'
 poolA = 'LB_ALGORITHM_ROUND_ROBIN'
 poolHm = hmHttpName
-PoolServerList = ['172.16.3.252', '172.16.3.253']
+poolServerList = ['172.16.3.252', '172.16.3.253']
 poolPort = 80
 #
 # Vs
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     # Create a poolData variable to be used when creating the pool
     #
     servers = []
-    for server in PoolServerList:
+    for server in poolServerList:
         serverDict = {}
         serverDict['addr'] = server
         serverDict['type'] = 'V4'

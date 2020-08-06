@@ -36,7 +36,8 @@ avi@ansible:~/python/aviVs$ more creds.json
 
 ```
 
-2. All the other paramaters/variables are stored in the python script aviVs.py. The following parameters need to be changed:
+2. All the other paramaters/variables are stored in the python script aviVs.py.
+The variable called 'PoolServerList' needs to be adjusted.
 
 ```
 # Health Monitor
@@ -53,7 +54,7 @@ hmHttpSc = 2
 poolName = 'pool1'
 poolA = 'LB_ALGORITHM_ROUND_ROBIN'
 poolHm = hmHttpName
-PoolServerList = ['172.16.3.252', '172.16.3.253']
+poolServerList = ['172.16.3.252', '172.16.3.253']
 poolPort = 80
 #
 # Vs
@@ -65,8 +66,8 @@ vsSslCertificate = 'System-Default-Cert'
 
 ## Use the the python script to:
 1. Create a Health Monitor
-2. Create a Pool
-3. Create a VS based on Avi IPAM and DNS
+2. Create a Pool (based on the Health Monitor previously created)
+3. Create a VS based on Avi IPAM and DNS and based on the pool previously created
 
 ## Run the terraform:
 - deploy:
