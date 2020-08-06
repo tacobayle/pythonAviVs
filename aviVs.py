@@ -72,26 +72,14 @@ class aviSession:
             break
     return name, network, mask, type
 
-  def configureHealthMonitor(self, hmData):
-    api = ApiSession.get_session(self.fqdn, self.username, self.password, self.tenant)
-    configureHealthMonitorResult = api.post('healthmonitor', data=hmData)
-    return configureHealthMonitorResult
-
-  def configurePool(self, poolData):
-    api = ApiSession.get_session(self.fqdn, self.username, self.password, self.tenant)
-    configurePoolResult = api.post('pool', data=poolData)
-    return configurePoolResult
-
-
   def getObjByName(self, object, objectName):
     api = ApiSession.get_session(self.fqdn, self.username, self.password, self.tenant)
     return api.get_object_by_name(object, objectName)
 
-  def configureVs(self, vsData):
+  def configureMyObjectMyData(self, myObject, myData):
     api = ApiSession.get_session(self.fqdn, self.username, self.password, self.tenant)
-    configureVsResult = api.post('virtualservice', data=vsData)
-    return configureVsResult
-
+    myResult = api.post(myObject, data=myData)
+    return myResult
 #
 # Main Pyhton script
 #
@@ -119,7 +107,7 @@ if __name__ == '__main__':
       "successful_checks": hmHttpSc,
       "type": hmHttpType
     }
-    print(defineClass.configureHealthMonitor(hmData))
+    print(defineClass.configureMyObjectMyData('healthmonitor', hmData))
     #
     # Create a poolData variable to be used when creating the pool
     #
@@ -137,7 +125,7 @@ if __name__ == '__main__':
       "health_monitor_refs": ['/api/healthmonitor?name=' + objectPrefix + hmHttpName],
       "servers": servers
     }
-    print(defineClass.configurePool(poolData))
+    print(defineClass.configureMyObjectMyData('pool', poolData))
     #
     # Create a list of services (with ssl enabled if tcp port == 443)
     #
@@ -163,4 +151,4 @@ if __name__ == '__main__':
       "auto_allocate_ip": "true",
       "dns_info": [{"fqdn": objectPrefix + vsName + '.' + domainName}]
     }
-    print(defineClass.configureVs(vsData))
+    print(defineClass.configureMyObjectMyData('virtualservice', vsData))
