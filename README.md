@@ -112,3 +112,4 @@ resource "avi_virtualservice" "https_vs" {
   }
 }
 ```
+- test vsvip agianst 20.1.1
