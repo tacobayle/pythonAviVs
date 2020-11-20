@@ -3,7 +3,7 @@ import sys, json
 #
 # Variables to be modified
 #
-poolServerList = ['172.16.3.252', '172.16.3.253']
+poolServerList = ['100.64.129.60', '100.64.129.34']
 cloudName = 'cloudVmw'
 #
 # other variables
