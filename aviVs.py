@@ -1,12 +1,16 @@
 from avi.sdk.avi_api import ApiSession
 import sys, json
 #
-# Variables
+# Variables to be modified
+#
+poolServerList = ['172.16.3.252', '172.16.3.253']
+cloudName = 'cloudVmw'
+#
+# other variables
 #
 fileCredential = sys.argv[1]
 tenant = "admin"
 objectPrefix = 'python-'
-#
 # Health Monitor
 hmHttpName = 'hm1'
 hmHttpType = 'HEALTH_MONITOR_HTTP'
@@ -16,14 +20,11 @@ hmHttpSi = 1
 hmHttpR = 'HEAD / HTTP/1.0'
 hmHttpRc = ["HTTP_2XX", "HTTP_3XX", "HTTP_5XX"]
 hmHttpSc = 2
-#
 # Pool
 poolName = 'pool1'
 poolA = 'LB_ALGORITHM_ROUND_ROBIN'
 poolHm = hmHttpName
-poolServerList = ['172.16.3.252', '172.16.3.253']
 poolPort = 80
-#
 # Vs
 vsName = 'app1'
 vsPorts = [80, 443]
@@ -123,6 +124,7 @@ if __name__ == '__main__':
       "name": objectPrefix + poolName,
       "lb_algorithm:": poolA,
       "health_monitor_refs": ['/api/healthmonitor?name=' + objectPrefix + hmHttpName],
+      "cloud_ref": '/api/cloud/?name=' + cloudName,
       "servers": servers
     }
     print(defineClass.configureMyObjectMyData('pool', poolData))
@@ -149,6 +151,7 @@ if __name__ == '__main__':
       "pool_ref": defineClass.getObjByName('pool', poolData['name'])['uuid'],
       "subnet_uuid": networkUuid,
       "auto_allocate_ip": "true",
+      "cloud_ref": '/api/cloud/?name=' + cloudName,
       "dns_info": [{"fqdn": objectPrefix + vsName + '.' + domainName}]
     }
     print(defineClass.configureMyObjectMyData('virtualservice', vsData))
